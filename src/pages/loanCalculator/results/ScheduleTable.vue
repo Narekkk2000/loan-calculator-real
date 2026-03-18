@@ -1,0 +1,51 @@
+<script setup lang="ts">
+import { ref, defineAsyncComponent } from 'vue'
+import { useLoanStore } from '@/stores/loanCalculator/loanCalculator'
+import BaseText from '@/components/base/text/BaseText.vue'
+import BaseFlex from '@/components/base/layout/BaseFlex.vue'
+import {useModal} from "@/composables/ui/useModal";
+import { Button } from "@/components/ui/button";
+
+const ScheduleTableModal = defineAsyncComponent(
+  () => import('@/pages/loanCalculator/results/modals/ScheduleTableModal.vue'),
+)
+
+const store = useLoanStore()
+
+const { isOpen, open } = useModal()
+const hasOpenedModal = ref(false)
+
+function handleExpandClick() {
+  hasOpenedModal.value = true
+  open()
+}
+</script>
+
+<template>
+  <div class="rounded-xl bg-gray-50 p-5">
+    <BaseFlex justify="between" align="center" gap="4" class="flex-wrap">
+      <div>
+        <BaseText tag="p" variant="kpi-label" color="CONTENT">
+          Մարման գրաֆիկ
+        </BaseText>
+        <BaseText tag="p" variant="hint" color="MUTED" class="mt-1">
+          Բացել ամբողջական մարման աղյուսակը մոդալ պատուհանում
+        </BaseText>
+      </div>
+
+      <Button
+        size="sm"
+        :disabled="store.schedule.length === 0"
+        @click="handleExpandClick"
+      >
+        Բացել գրաֆիկը
+      </Button>
+    </BaseFlex>
+
+    <ScheduleTableModal
+      v-if="hasOpenedModal"
+      v-model="isOpen"
+      :schedule="store.schedule"
+    />
+  </div>
+</template>
