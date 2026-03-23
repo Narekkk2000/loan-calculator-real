@@ -68,8 +68,8 @@ export const useLoanTerm = () => {
 
     const termHint = computed(() =>
         store.loanTermUnit === 'months'
-            ? `= ${Math.round(store.totalMonths / 12 * 10) / 10} տարիներ ընդհանուր`
-            : `= ${store.totalMonths} ամիսների ընդհանուր`
+            ? `= Ընդհանուր  ${Math.round(store.totalMonths / 12 * 10) / 10}  տարի`
+            : `= Ընդհանուր  ${store.totalMonths}  ամիս`
     )
 
     return {
