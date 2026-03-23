@@ -1,31 +1,41 @@
 <script setup lang="ts">
+import { useLoanStore } from '@/stores/loanCalculator/loanCalculator'
 import {useLoanAmount} from "@/composables/features/loan/useLoanAmount";
 import {formatPresetLabel} from "@/utils/formatters"
-import { LOAN_AMOUNT_PRESETS } from '@/constants/options'
+import { CURRENCY_OPTIONS, LOAN_AMOUNT_PRESETS } from '@/constants/options'
+import { CURRENCY_SYMBOLS } from '@/constants/currency'
+import type { Currency } from '@/types/common'
 
 import InputField from '@/components/shared/InputField.vue'
 import BaseFlex from '@/components/base/layout/BaseFlex.vue'
+import ToggleSwitch from '@/components/shared/ToggleSwitch.vue'
 import { Button } from "@/components/ui/button";
 
+const store = useLoanStore()
 const { localValue, validationError, onInput, isPresetActive, selectPreset } = useLoanAmount()
 </script>
 
 <template>
   <BaseFlex class="w-full" col align="end" gap="1">
+    <ToggleSwitch
+      :options="CURRENCY_OPTIONS"
+      :model-value="store.loanCurrency"
+      @update:model-value="(value) => (store.loanCurrency = value as Currency)"
+    />
+
     <div class="w-full self-start">
       <InputField
         has-prefix
-        label="Գումար"
+        label="Ավանդի գումարը՝"
         type="number"
         inputmode="numeric"
-        label-margin-top="0px"
-        label-margin-bottom="-10px"
+        label-margin-bottom="-5px"
         placeholder="500000"
         :model-value="localValue"
         :error="validationError"
         @update:model-value="onInput"
       >
-        <template #prefix>$</template>
+        <template #prefix>{{ CURRENCY_SYMBOLS[store.loanCurrency] }}</template>
       </InputField>
     </div>
 

@@ -1,7 +1,7 @@
 <template>
   <BaseModal
     :model-value="modelValue"
-    max-width="full"
+    max-width="3xl"
     @update:model-value="emit('update:modelValue', $event)"
   >
     <!-- ── Header ──────────────────────────────────────────────────────────── -->
@@ -106,7 +106,7 @@
                 fontSize: '16px'
               }"
             >
-              {{ cellValue(row as any, col.key) }}
+              {{ cellValue(row as any, col.key, props.currency) }}
             </td>
           </tr>
         </tbody>
@@ -122,10 +122,12 @@ import BaseText from '@/components/base/text/BaseText.vue'
 import { COLORS } from '@/constants/colors'
 import { SCHEDULE_COLUMNS } from '@/constants/table'
 import { cellColor, cellValue } from '@/utils/formatters'
+import type { Currency } from '@/types/common'
 import {PaymentScheduleRow} from "@/types/loan";
 
-defineProps<{
+const props = defineProps<{
   modelValue: boolean
+  currency: Currency
   /** Full schedule rows passed down from parent — no store access here. */
   schedule: PaymentScheduleRow[]
 }>()

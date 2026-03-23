@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<{
   activeTextColor: '#fff',
   inactiveColor: '#F3F8FE',
   inactiveTextColor: '#8D8D8D',
-  radius: '6px',
+  radius: '4px',
   fontSize: '13px',
 })
 

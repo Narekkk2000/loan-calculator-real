@@ -24,14 +24,15 @@ const activeOption = computed(() =>
 
 <template>
   <div class="w-full">
-    <BaseHeading>Վճարման տեսակը</BaseHeading>
-    <ToggleSwitch
-      :options="repaymentOptions"
-      :model-value="store.repaymentType"
-      @update:model-value="(value) => (store.repaymentType = value as typeof store.repaymentType)"
-    />
+    <BaseFlex class="w-full" justify="between">
+      <BaseText variant="sub-hint" color="CONTENT">
+        Վճարման տեսակը՝
+      </BaseText>
+      <ToggleSwitch :options="repaymentOptions" :model-value="store.repaymentType"
+        @update:model-value="(value) => (store.repaymentType = value as typeof store.repaymentType)" />
+    </BaseFlex>
 
-    <BaseText tag="p" variant="hint" color="MUTED" class="mt-2">
+    <BaseText tag="p" variant="hint" color="MUTED" class="mt-2 text-end">
       {{ activeOption?.description }}
     </BaseText>
   </div>

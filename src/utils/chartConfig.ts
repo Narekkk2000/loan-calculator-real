@@ -1,5 +1,6 @@
 import type { PaymentScheduleRow } from '@/types/loan'
-import { formatCurrency } from '@/utils/format'
+import type { Currency } from '@/types/common'
+import { formatCompactCurrency, formatCurrency } from '@/utils/format'
 import { COLORS } from '@/constants/colors'
 
 // ─── Sampling ────────────────────────────────────────────────────────────────
@@ -47,7 +48,7 @@ export function buildPaymentChartData(rows: PaymentScheduleRow[]) {
   }
 }
 
-export function buildPaymentChartOptions() {
+export function buildPaymentChartOptions(currency: Currency = 'USD') {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -74,7 +75,7 @@ export function buildPaymentChartOptions() {
         bodyFont: { family: '\'IBM Plex Mono\', monospace', size: 11 },
         callbacks: {
           title: (items: any[]) => `Month ${items[0].label}`,
-          label: (ctx: any) => ` ${ctx.dataset.label}: ${formatCurrency(ctx.raw)}`,
+          label: (ctx: any) => ` ${ctx.dataset.label}: ${formatCurrency(ctx.raw, currency)}`,
         },
       },
     },
@@ -96,8 +97,7 @@ export function buildPaymentChartOptions() {
         ticks: {
           color: COLORS.DIM,
           font: { family: '\'IBM Plex Mono\', monospace', size: 9 },
-          callback: (v: any) =>
-            v >= 1000 ? `$${(v / 1000).toFixed(0)}k` : `$${v}`,
+          callback: (v: any) => formatCompactCurrency(Number(v), currency),
         },
         border: { display: false },
       },
@@ -139,7 +139,7 @@ export function buildBalanceChartData(rows: PaymentScheduleRow[]) {
   }
 }
 
-export function buildBalanceChartOptions() {
+export function buildBalanceChartOptions(currency: Currency = 'USD') {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -156,7 +156,7 @@ export function buildBalanceChartOptions() {
         bodyFont: { family: '\'IBM Plex Mono\', monospace', size: 12 },
         callbacks: {
           title: (items: any[]) => `Month ${items[0].label}`,
-          label: (ctx: any) => ` Balance: ${formatCurrency(ctx.raw)}`,
+          label: (ctx: any) => ` Balance: ${formatCurrency(ctx.raw, currency)}`,
         },
       },
     },
@@ -176,12 +176,7 @@ export function buildBalanceChartOptions() {
         ticks: {
           color: COLORS.DIM,
           font: { family: '\'IBM Plex Mono\', monospace', size: 9 },
-          callback: (v: any) =>
-            v >= 1000000
-              ? `$${(v / 1000000).toFixed(1)}M`
-              : v >= 1000
-              ? `$${(v / 1000).toFixed(0)}k`
-              : `$${v}`,
+          callback: (v: any) => formatCompactCurrency(Number(v), currency),
         },
         border: { display: false },
       },

@@ -1,4 +1,5 @@
-import type { LoanTermUnit, InterestRateType, RepaymentType } from '@/types/loan'
+import type { LoanTermUnit, InterestRateType, RepaymentType } from '@/types/loan';
+import { Currency } from '@/types/common';
 
 // ─── Loan Amount ─────────────────────────────────────────────────────────────
 
@@ -10,6 +11,14 @@ export const TERM_UNIT_OPTIONS: { value: LoanTermUnit; label: string }[] = [
   { value: 'months', label: 'Ամիսներ' },
   { value: 'years', label: 'Տարիներ' },
 ]
+
+export const CURRENCY_OPTIONS: { value: Currency; label: string }[] = [
+  { value: 'AMD', label: 'AMD' },
+  { value: 'USD', label: 'USD' },
+  { value: 'EUR', label: 'EUR' },
+]
+
+export const DEPOSIT_CURRENCY_OPTIONS = CURRENCY_OPTIONS
 
 export const LOAN_TERM_PRESETS = [3, 6, 12, 24, 36, 60] as const
 

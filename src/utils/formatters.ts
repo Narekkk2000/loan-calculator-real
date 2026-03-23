@@ -1,3 +1,4 @@
+import type { Currency } from '@/types/common'
 import { formatCurrency } from '@/utils/format'
 import { COLORS } from '@/constants/colors'
 
@@ -5,9 +6,9 @@ import { COLORS } from '@/constants/colors'
  * Returns the formatted display value for a schedule table cell.
  * Month column renders as a plain integer; all others as currency.
  */
-export function cellValue(row: Record<string, number>, key: string): string {
+export function cellValue(row: Record<string, number>, key: string, currency: Currency = 'USD'): string {
   if (key === 'month') return String(row[key])
-  return formatCurrency(row[key])
+  return formatCurrency(row[key], currency)
 }
 
 /**

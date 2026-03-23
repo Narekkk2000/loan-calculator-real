@@ -24,7 +24,7 @@ const { localValue, validationError, termHint, isPresetActive, selectPreset, onI
 
       <div class="w-full self-start">
         <InputField
-          label="Տևողություն"
+          label="Տևողությունը՝"
           type="number"
           placeholder="24"
           :model-value="localValue"

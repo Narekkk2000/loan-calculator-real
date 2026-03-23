@@ -5,6 +5,8 @@ import { formatCurrency, formatPercent } from '@/utils/format'
 
 export function useExportPDF() {
     const store = useLoanStore()
+    const fmtCurrency = (value: number, decimals = 2) =>
+        formatCurrency(value, store.loanCurrency, decimals)
 
     async function captureElement(el: HTMLElement): Promise<string> {
         const canvas = await html2canvas(el, {
@@ -62,7 +64,7 @@ export function useExportPDF() {
         y += 5
 
         const params = [
-            ['Loan Amount', formatCurrency(store.loanAmount)],
+            ['Loan Amount', fmtCurrency(store.loanAmount)],
             ['Loan Term', `${store.loanTermValue} ${store.loanTermUnit}`],
             ['Interest Rate', `${store.interestRateValue}% (${store.interestRateType})`],
             ['Repayment Type', store.repaymentType.charAt(0).toUpperCase() + store.repaymentType.slice(1)],
@@ -95,10 +97,10 @@ export function useExportPDF() {
 
         const s = store.summary
         const summaryRows = [
-            ['Total Payment', formatCurrency(s.totalPayment), 'Total Principal', formatCurrency(s.totalPrincipal)],
-            ['Total Interest', formatCurrency(s.totalInterest), 'Total Commissions', formatCurrency(s.totalCommissions)],
-            ['Total Overpayment', formatCurrency(s.totalOverpayment), 'Effective Rate', formatPercent(s.effectiveRate)],
-            ['First Month Payment', formatCurrency(s.firstMonthPayment), 'Last Month Payment', formatCurrency(s.lastMonthPayment)],
+            ['Total Payment', fmtCurrency(s.totalPayment), 'Total Principal', fmtCurrency(s.totalPrincipal)],
+            ['Total Interest', fmtCurrency(s.totalInterest), 'Total Commissions', fmtCurrency(s.totalCommissions)],
+            ['Total Overpayment', fmtCurrency(s.totalOverpayment), 'Effective Rate', formatPercent(s.effectiveRate)],
+            ['First Month Payment', fmtCurrency(s.firstMonthPayment), 'Last Month Payment', fmtCurrency(s.lastMonthPayment)],
         ]
 
         doc.setFontSize(9)
@@ -208,11 +210,11 @@ export function useExportPDF() {
             doc.setTextColor(240, 244, 255)
             const cells = [
                 String(row.month),
-                formatCurrency(row.payment, 0),
-                formatCurrency(row.principal, 0),
-                formatCurrency(row.interest, 0),
-                formatCurrency(row.totalCommissions, 0),
-                formatCurrency(row.balance, 0),
+                fmtCurrency(row.payment, 0),
+                fmtCurrency(row.principal, 0),
+                fmtCurrency(row.interest, 0),
+                fmtCurrency(row.totalCommissions, 0),
+                fmtCurrency(row.balance, 0),
             ]
             cx = margin
             cells.forEach((cell, i) => {

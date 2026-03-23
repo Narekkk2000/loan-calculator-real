@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useLoanStore } from '@/stores/loanCalculator/loanCalculator'
-import {CommissionInput} from "@/types/loan";
+import { CommissionInput } from "@/types/loan";
 
 import SectionCard from '@/components/shared/SectionCard.vue'
 import BaseText from '@/components/base/text/BaseText.vue'
@@ -37,40 +37,32 @@ const rows: CommissionRowConfig[] = [
     label: 'Տարեկան',
     hint: 'Ամիսներ 1,13,25…',
     get: () => store.annualCommission,
-    set: (v) => { store.annualCommission  = v }
+    set: (v) => { store.annualCommission = v }
   },
 ] as const
 </script>
 
 <template>
   <div>
-    <BaseHeading>Միջնորդավճարներ և վճարներ</BaseHeading>
+    <BaseText variant="sub-hint" color="CONTENT" class="mb-8">
+      Միջնորդավճարներ և վճարներ
+    </BaseText>
     <!-- Header -->
-    <BaseFlex gap="3" class="mb-3">
-      <div class="w-24 shrink-0" />
-      <div class="flex-1 text-center text-[11px] uppercase tracking-widest text-app-muted font-medium font-ibm-mono">
-        Տոկոս
-      </div>
-      <div class="w-6 shrink-0" />
-      <div class="flex-1 text-center text-[11px] uppercase tracking-widest text-app-muted font-medium font-ibm-mono">
-        Ֆիքսված գումար
-      </div>
-    </BaseFlex>
 
     <!-- Rows -->
     <div class="space-y-3">
       <template v-for="(row, idx) in rows" :key="row.label">
-        <CommissionRow
-            :label="row.label"
-            :hint="row.hint"
-            :model-value="row.get()"
-            @update:model-value="row.set($event)"
-        />
-        <BaseDivider v-if="idx < rows.length - 1" />
+        <CommissionRow 
+        class="mt-12"
+        :label="row.label" 
+        :hint="row.hint" 
+        :model-value="row.get()"
+        :show-headers="idx === 0"
+          @update:model-value="row.set($event)" />
       </template>
     </div>
 
-    <BaseText tag="p" variant="footnote" color="MUTED" class="mt-3">
+    <BaseText style="text-align: end;" tag="p" variant="footnote" color="MUTED" class="mt-3">
       * Երկու դաշտերն էլ լրացված լինելու դեպքում առաջնահերթությունը տրվում է տոկոսին։
     </BaseText>
   </div>

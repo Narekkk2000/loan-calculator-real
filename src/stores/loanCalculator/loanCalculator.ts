@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import type { Currency } from '@/types/common'
 import type {
   PaymentScheduleRow,
   LoanSummary,
@@ -12,6 +13,7 @@ import type {
 export const useLoanStore = defineStore('loanCalculator', () => {
   // ─── Input State ─────────────────────────────────────────────────────────────
   const loanAmount = ref<number>(500000)
+  const loanCurrency = ref<Currency>('USD')
   const loanTermValue = ref<number>(24)
   const loanTermUnit = ref<LoanTermUnit>('months')
   const interestRateValue = ref<number>(12)
@@ -173,6 +175,7 @@ export const useLoanStore = defineStore('loanCalculator', () => {
   return {
     // State
     loanAmount,
+    loanCurrency,
     loanTermValue,
     loanTermUnit,
     interestRateValue,

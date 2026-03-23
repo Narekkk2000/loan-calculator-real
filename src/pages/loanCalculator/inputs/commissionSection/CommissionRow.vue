@@ -23,56 +23,38 @@ const {
   onPercentInput,
   onAmountInput,
 } = useCommissionRow(
-    () => props.modelValue,
-    (val) => emit('update:modelValue', val),
+  () => props.modelValue,
+  (val) => emit('update:modelValue', val),
 )
 </script>
 
 <template>
-  <BaseFlex gap="3">
+  <BaseFlex gap="3" class="border border-gray-200 p-2 rounded-[6px] relative" style="border-top-left-radius: 0px;">
+    <div class="px-2 py-1 bg-[#F3F8FE] text-black text-xs font-bold font-arm rounded-sm absolute top-[-22px] left-[-1px]" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">{{ label }}</div>
     <!-- Label -->
     <div class="w-24 shrink-0">
-      <BaseText tag="p" variant="hint" color="CONTENT">{{ label }}</BaseText>
-      <BaseText v-if="hint" tag="p" variant="sub-hint" color="MUTED" class="mt-0.5">
+      <BaseText v-if="hint" tag="p" variant="hint" style="font-size: 12px; color: black;" color="MUTED" class="mt-0.5">
         {{ hint }}
       </BaseText>
     </div>
 
     <!-- Percent field -->
     <div class="flex-1">
-      <InputField
-          label=""
-          type="number"
-          inputmode="decimal"
-          :model-value="localPercent"
-          :min="0"
-          :step="0.1"
-          :error="percentError"
-          placeholder="0"
-          has-suffix
-          @update:model-value="onPercentInput"
-      >
+      <BaseText tag="p" variant="hint" color="CONTENT" class="mb-5 font-bold">Տոկոս</BaseText>
+      <InputField label="" type="number" inputmode="decimal" :model-value="localPercent" :min="0" :step="0.1"
+        :error="percentError" placeholder="0" has-suffix @update:model-value="onPercentInput">
         <template #suffix>%</template>
       </InputField>
     </div>
 
     <!-- Or divider -->
-    <BaseText tag="span" variant="hint" color="DEEP" class="pb-1">կամ</BaseText>
+    <BaseText tag="span" variant="hint" color="DEEP" class="pb-1 mt-6" style="color: black;">կամ</BaseText>
 
     <!-- Amount field -->
     <div class="flex-1">
-      <InputField
-          label=""
-          type="number"
-          inputmode="numeric"
-          :model-value="localAmount"
-          :min="0"
-          :step="10"
-          :error="amountError"
-          placeholder="0"
-          has-prefix
-          @update:model-value="onAmountInput"
-      >
+      <BaseText tag="p" variant="hint" color="CONTENT" class="mb-5 font-bold">Ֆիքսված գումար</BaseText>
+      <InputField label="" type="number" inputmode="numeric" :model-value="localAmount" :min="0" :step="10"
+        :error="amountError" placeholder="0" has-prefix @update:model-value="onAmountInput">
         <template #prefix>$</template>
       </InputField>
     </div>

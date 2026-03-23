@@ -22,10 +22,10 @@ function handleExpandClick() {
 </script>
 
 <template>
-  <div class="rounded-xl bg-gray-50 p-5">
+  <div class="rounded-xl bg-[#f6f8fa] border border-[#E8EEF6] p-5">
     <BaseFlex justify="between" align="center" gap="4" class="flex-wrap">
       <div>
-        <BaseText tag="p" variant="kpi-label" color="CONTENT">
+        <BaseText tag="p" variant="kpi-label" color="CONTENT" class="font-bold">
           Մարման գրաֆիկ
         </BaseText>
         <BaseText tag="p" variant="hint" color="MUTED" class="mt-1">
@@ -34,7 +34,7 @@ function handleExpandClick() {
       </div>
 
       <Button
-        size="sm"
+        size="lg"
         :disabled="store.schedule.length === 0"
         @click="handleExpandClick"
       >
@@ -45,6 +45,7 @@ function handleExpandClick() {
     <ScheduleTableModal
       v-if="hasOpenedModal"
       v-model="isOpen"
+      :currency="store.loanCurrency"
       :schedule="store.schedule"
     />
   </div>

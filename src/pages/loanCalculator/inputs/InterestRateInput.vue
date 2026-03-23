@@ -20,37 +20,36 @@ const {
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="w-full flex flex-col">
+        <ToggleSwitch
+          class="self-end"
+          :options="INTEREST_RATE_TYPE_OPTIONS"
+          :model-value="store.interestRateType"
+          @update:model-value="onTypeChange"
+    />
     <div class="w-full">
         <InputField
-          label="Տոկոս"
+          label="Տոկոսը՝"
           type="number"
           :model-value="localValue"
           :min="0"
           :step="rateStep"
           :error="validationError"
           placeholder="12"
-          label-margin-bottom="-15px"
-          label-margin-top="-30px"
+          label-margin-top="-23px"
           @update:model-value="onInput"
         >
           <template #prefix>%</template>
         </InputField>
     </div>
 
-    <ToggleSwitch
-    class="mt-3"
-      :options="INTEREST_RATE_TYPE_OPTIONS"
-      :model-value="store.interestRateType"
-      @update:model-value="onTypeChange"
-    />
 
     <BaseText
         v-if="rateHint"
         tag="p"
         variant="hint"
         color="MUTED"
-        class="mt-2"
+        class="mt-2 self-end"
     >
       {{ rateHint }}
     </BaseText>

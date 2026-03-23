@@ -38,7 +38,7 @@ const store = useLoanStore()
 
 const sampled = computed(() => sampleSchedule(store.schedule))
 const chartData = computed(() => buildBalanceChartData(sampled.value))
-const chartOptions = computed(() => buildBalanceChartOptions())
+const chartOptions = computed(() => buildBalanceChartOptions(store.loanCurrency))
 
 const { isOpen, open } = useModal()
 const hasOpenedModal = ref(false)
@@ -119,6 +119,7 @@ function handleExpandClick() {
     <BalanceChartModal
       v-if="hasOpenedModal"
       v-model="isOpen"
+      :currency="store.loanCurrency"
       :sampled="sampled"
     />
   </div>

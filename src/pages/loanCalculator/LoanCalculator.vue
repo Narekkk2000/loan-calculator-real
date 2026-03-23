@@ -25,7 +25,7 @@ const loanExportStore = useLoanExportStore();
         <BaseDivider :thickness="1" class="bg-gray-300"/>
         <LoanTermInput class="mt-3"/>
         <BaseDivider :thickness="1"/>
-        <InterestRateInput class="mt-12"/>
+        <InterestRateInput class="mt-3"/>
         <BaseDivider :thickness="1"/>
         <RepaymentTypeSelector class="mt-3"/>
         <BaseDivider :thickness="1"/>

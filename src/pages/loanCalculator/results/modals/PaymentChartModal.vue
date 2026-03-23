@@ -89,6 +89,7 @@ import {
   LinearScale,
 } from 'chart.js'
 import { buildPaymentChartData, buildPaymentChartOptions } from '@/utils/chartConfig'
+import type { Currency } from '@/types/common'
 import {PaymentScheduleRow} from "@/types/loan";
 import BaseModal from '@/components/base/overlays/BaseModal.vue'
 import BaseHeading from '@/components/base/text/BaseHeading.vue'
@@ -98,6 +99,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const props = defineProps<{
   modelValue: boolean
+  currency: Currency
   /** Sampled schedule rows passed down from parent — no store access here. */
   sampled: PaymentScheduleRow[]
 }>()
@@ -107,5 +109,5 @@ const emit = defineEmits<{
 }>()
 
 const chartData = computed(() => buildPaymentChartData(props.sampled as any))
-const chartOptions = computed(() => buildPaymentChartOptions())
+const chartOptions = computed(() => buildPaymentChartOptions(props.currency))
 </script>
