@@ -29,7 +29,7 @@ function handleExpandClick() {
           Մարման գրաֆիկ
         </BaseText>
         <BaseText tag="p" variant="hint" color="MUTED" class="mt-1">
-          Բացել ամբողջական մարման աղյուսակը մոդալ պատուհանում
+          Տեսնել մարման ամբողջական աղյուսակն առանձին պատուհանում
         </BaseText>
       </div>
 
