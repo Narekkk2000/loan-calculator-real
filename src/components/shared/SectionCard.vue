@@ -28,14 +28,14 @@ defineProps<{
     <BaseFlex
       v-if="title"
       gap="2"
-      class="px-6! py-4"
+      class=" py-14"
     >
       <BaseHeading :level="3" variant="section-title" color="MUTED">
         {{ title }}
       </BaseHeading>
     </BaseFlex>
-    <div :class="padding ?? 'p-6'">
-      <slot />
+    <div class="py-4">
+      <slot/>
     </div>
   </BaseBox>
 </template>

@@ -19,9 +19,9 @@ const loanExportStore = useLoanExportStore();
 
 <template>
   <div class="flex flex-col items-start gap-6">
-    <SectionCard>
-      <BaseFlex col gap="3">
-        <LoanAmountInput />
+    <SectionCard > 
+      <BaseFlex col gap="3" class="w-[92%] m-auto">
+        <LoanAmountInput/>
         <BaseDivider :thickness="1" class="bg-gray-300"/>
         <LoanTermInput class="mt-3"/>
         <BaseDivider :thickness="1"/>
@@ -29,7 +29,7 @@ const loanExportStore = useLoanExportStore();
         <BaseDivider :thickness="1"/>
         <RepaymentTypeSelector class="mt-3"/>
         <BaseDivider :thickness="1"/>
-        <CommissionSection />
+        <CommissionSection class=""/>
         <BaseDivider :thickness="1"/>
         <div :ref="(el) => loanExportStore.summaryCardsRef = el as HTMLElement" class="mt-3 w-full">
           <SummaryCards />
