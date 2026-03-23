@@ -26,7 +26,7 @@ const { localValue, validationError, onInput, isPresetActive, selectPreset } = u
     <div class="w-full self-start">
       <InputField
         has-prefix
-        label="Ավանդի գումարը՝"
+        label="Վարկի գումարը՝"
         type="number"
         inputmode="numeric"
         label-margin-bottom="-5px"
