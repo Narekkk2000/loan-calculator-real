@@ -51,7 +51,7 @@ export const REPAYMENT_TYPE_OPTIONS: RepaymentTypeOption[] = [
     value: 'differentiated',
     icon: '◉',
     title: 'Դիֆերենցված',
-    description: 'Վճարումները նվազում են, քանի որ գլխավոր գումարը նվազում է ամեն ամիս։',
+    description: 'Մայր գումարի հավասարաչափ մարում, սակայն անհավասարաչափ տոկոսավճարներ։',
     bullets: ['Higher initial payments', 'Lower total interest', 'Balance paid faster'],
   },
 ]
