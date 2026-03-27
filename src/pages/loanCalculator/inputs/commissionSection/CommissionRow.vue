@@ -28,6 +28,8 @@ const {
   (val) => emit('update:modelValue', val),
 )
 
+
+
 const isSmall = ref(window.innerWidth < 768)
 const onResize = () => { isSmall.value = window.innerWidth < 768 }
 onMounted(() => window.addEventListener('resize', onResize))
