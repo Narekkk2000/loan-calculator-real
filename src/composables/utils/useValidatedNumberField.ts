@@ -33,7 +33,7 @@ export const useValidatedNumberField = (
         delay = 300
     }: ValidatedNumberFieldConfig): ValidatedNumberFieldReturn => {
 
-    const { debounce } = useDebounce(delay)
+    const { debounce, cancel } = useDebounce(delay)
 
     const localValue = ref(String(source()))
     const validationError = ref('')
@@ -41,6 +41,9 @@ export const useValidatedNumberField = (
     watch(source, (val) => { localValue.value = String(val) }, { immediate: false })
 
     const onInput = (val: string) => {
+        // Always clear any pending commit so stale valid values cannot be restored.
+        cancel()
+
         localValue.value = val
         const normalized = val.replace(',', '.')
         validationError.value = validator(normalized)

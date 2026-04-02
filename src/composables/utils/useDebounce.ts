@@ -8,7 +8,11 @@ export const useDebounce = (delay = 300) => {
         timer = setTimeout(fn, delay)
     }
 
-    onUnmounted(() => clearTimeout(timer))
+    const cancel = () => {
+        clearTimeout(timer)
+    }
 
-    return { debounce }
+    onUnmounted(cancel)
+
+    return { debounce, cancel }
 }
