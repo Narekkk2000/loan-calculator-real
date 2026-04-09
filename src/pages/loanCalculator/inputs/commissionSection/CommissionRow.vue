@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useCommissionRow } from '@/composables/features/loan/useCommissionRow'
+import { useLoanStore } from '@/stores/loanCalculator/loanCalculator'
+import { CURRENCY_SYMBOLS } from '@/constants/currency'
 import type { CommissionInput } from '@/types/loan'
 import BaseText from '@/components/base/text/BaseText.vue'
 import BaseFlex from '@/components/base/layout/BaseFlex.vue'
@@ -15,6 +17,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   'update:modelValue': [value: CommissionInput]
 }>()
+
+const store = useLoanStore()
 
 const {
   localPercent,
@@ -64,7 +68,7 @@ onUnmounted(() => window.removeEventListener('resize', onResize))
       <BaseText tag="p" variant="hint" color="CONTENT" class="mb-5 font-bold">Ֆիքսված գումար</BaseText>
       <InputField label="" type="number" inputmode="numeric" :model-value="localAmount" :min="0" :step="10"
         :error="amountError" placeholder="0" has-prefix @update:model-value="onAmountInput">
-        <template #prefix>$</template>
+        <template #prefix>{{ CURRENCY_SYMBOLS[store.loanCurrency] }}</template>
       </InputField>
     </div>
     </div>
