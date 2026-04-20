@@ -38,13 +38,13 @@ const cards = computed<KpiCard[]>(() => {
       color: '#E4B016',
       icon: '〜',
     },
-    {
-      label: 'Արդյունավետ տոկոսադրույք',
-      value: formatPercent(s.effectiveRate),
-      sub: 'annual (incl. fees)',
-      color: '#63C55A',
-      icon: '◌',
-    },
+    // {
+    //   label: 'Արդյունավետ տոկոսադրույք',
+    //   value: formatPercent(s.effectiveRate),
+    //   sub: 'annual (incl. fees)',
+    //   color: '#63C55A',
+    //   icon: '◌',
+    // },
     {
       label: paymentLabel,
       value: formatCurrency(s.firstMonthPayment, currency),
